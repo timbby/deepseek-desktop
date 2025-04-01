@@ -17,9 +17,15 @@ function createWindow() {
   Menu.setApplicationMenu(null)
 
   // 深色模式适配
-  if (process.platform === 'darwin') {
-    app.dock.setIcon('./icon_1024x1024.icns')
+  const path = require('path')
+
+if (process.platform === 'darwin') {
+  try {
+    app.dock.setIcon(path.join(__dirname, 'icon_1024x1024.icns'))
+  } catch (error) {
+    console.error('Failed to set dock icon:', error)
   }
+}
 }
 
 app.whenReady().then(createWindow)
